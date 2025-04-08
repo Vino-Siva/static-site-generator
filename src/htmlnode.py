@@ -13,7 +13,7 @@ class HTMLNode:
             return ""
         new_string = ""
         for prop in self.props.items():
-            new_string += f" {prop[0]}=\"{prop[1]}\""
+            new_string += f' {prop[0]}="{prop[1]}"'
         return new_string
 
     def __repr__(self):
@@ -21,7 +21,6 @@ class HTMLNode:
 
 
 class LeafNode(HTMLNode):
-
     def __init__(self, tag, value, props=None):
         super().__init__(tag, value, None, props)
 
@@ -37,7 +36,6 @@ class LeafNode(HTMLNode):
 
 
 class ParentNode(HTMLNode):
-
     def __init__(self, tag, children, props=None):
         super().__init__(tag, None, children, props)
 
@@ -52,7 +50,7 @@ class ParentNode(HTMLNode):
             if isinstance(child, LeafNode):
                 new_child_element += child.to_html()
             if isinstance(child, ParentNode):
-                new_child_element = f"{child.to_html()}"
+                new_child_element += f"{child.to_html()}"
 
         return f"<{self.tag}{self.props_to_html()}>{new_child_element}</{self.tag}>"
 
