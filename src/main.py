@@ -1,13 +1,14 @@
 import os
 import shutil
 from textnode import TextNode, TextType
-from generate_page import generate_page
+from generate_pages_recursive import generate_pages_recursive
 
 
 def main():
     print(TextNode("This is some anchor text", TextType.LINK, "https: // www.boot.dev"))
     copy_content("./static", "./public")
-    generate_page("content/index.md", "template.html", "public/index.html")
+    copy_content("./content", "./public")
+    generate_pages_recursive("content", "template.html", "public")
 
 
 def copy_content(src, dest, is_root=True):
